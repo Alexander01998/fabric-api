@@ -200,7 +200,7 @@ public final class FabricClientTestHelper {
 				throw new RuntimeException("Timed out waiting for " + what);
 			}
 
-			waitFor(Duration.ofSeconds(1));
+			waitFor(Duration.ofMillis(10));
 		}
 	}
 
