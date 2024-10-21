@@ -79,6 +79,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 
 		if (onboardAccessibility) {
 			waitForScreen(AccessibilityOnboardingScreen.class);
+			// Main menu stuff works fine with no screenshot delay
 			takeScreenshot("onboarding_screen", Duration.ZERO);
 			clickScreenButton("gui.continue");
 		}
@@ -113,7 +114,8 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 		{
 			enableDebugHud();
 			waitForWorldTicks(200);
-			takeScreenshot("in_game_overworld", Duration.ZERO);
+			// Anything in-game needs a small delay before taking a screenshot
+			takeScreenshot("in_game_overworld", Duration.ofMillis(50));
 		}
 
 		MixinEnvironment.getCurrentEnvironment().audit();
@@ -121,13 +123,13 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 		{
 			// See if the player render events are working.
 			setPerspective(Perspective.THIRD_PERSON_BACK);
-			takeScreenshot("in_game_overworld_third_person", Duration.ofMillis(100));
+			takeScreenshot("in_game_overworld_third_person", Duration.ofMillis(50));
 			setPerspective(Perspective.FIRST_PERSON);
 		}
 
 		{
 			openInventory();
-			takeScreenshot("in_game_inventory", Duration.ZERO);
+			takeScreenshot("in_game_inventory", Duration.ofMillis(50));
 			closeScreen();
 		}
 
@@ -147,12 +149,12 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 			server.runCommand("gamemode creative " + profile.getName());
 
 			waitForWorldTicks(20);
-			takeScreenshot("server_in_game", Duration.ZERO);
+			takeScreenshot("server_in_game", Duration.ofMillis(50));
 
 			{ // Test that we can enter and exit configuration
 				server.runCommand("debugconfig config " + profile.getName());
 				waitForScreen(ReconfiguringScreen.class);
-				takeScreenshot("server_config", Duration.ZERO);
+				takeScreenshot("server_config", Duration.ofMillis(50));
 				server.runCommand("debugconfig unconfig " + profile.getId());
 				waitForWorldTicks(1);
 			}
