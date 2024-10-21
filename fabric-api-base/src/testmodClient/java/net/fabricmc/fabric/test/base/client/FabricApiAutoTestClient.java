@@ -133,7 +133,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 
 		{
 			openGameMenu();
-			takeScreenshot("game_menu", Duration.ofMillis(100));
+			takeScreenshot("game_menu", Duration.ofMillis(50));
 			clickScreenButton("menu.returnToMenu");
 			waitForScreen(TitleScreen.class);
 		}
@@ -158,7 +158,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 			}
 
 			openGameMenu();
-			takeScreenshot("server_game_menu", Duration.ofMillis(100));
+			takeScreenshot("server_game_menu", Duration.ofMillis(50));
 			clickScreenButton("menu.disconnect");
 
 			waitForScreen(MultiplayerScreen.class);
