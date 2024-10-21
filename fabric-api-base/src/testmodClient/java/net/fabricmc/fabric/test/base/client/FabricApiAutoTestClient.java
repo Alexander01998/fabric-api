@@ -78,7 +78,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 
 		if (onboardAccessibility) {
 			waitForScreen(AccessibilityOnboardingScreen.class);
-			takeScreenshot("onboarding_screen");
+			takeScreenshot("onboarding_screen", Duration.ZERO);
 			clickScreenButton("gui.continue");
 		}
 
@@ -90,7 +90,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 
 		if (!isDirEmpty(FabricLoader.getInstance().getGameDir().resolve("saves"))) {
 			waitForScreen(SelectWorldScreen.class);
-			takeScreenshot("select_world_screen");
+			takeScreenshot("select_world_screen", Duration.ZERO);
 			clickScreenButton("selectWorld.create");
 		}
 
@@ -98,7 +98,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 			waitForScreen(CreateWorldScreen.class);
 			clickScreenButton("selectWorld.gameMode");
 			clickScreenButton("selectWorld.gameMode");
-			takeScreenshot("create_world_screen");
+			takeScreenshot("create_world_screen", Duration.ZERO);
 			clickScreenButton("selectWorld.create");
 		}
 
@@ -111,7 +111,7 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 		{
 			enableDebugHud();
 			waitForWorldTicks(200);
-			takeScreenshot("in_game_overworld");
+			takeScreenshot("in_game_overworld", Duration.ZERO);
 		}
 
 		MixinEnvironment.getCurrentEnvironment().audit();
@@ -119,19 +119,19 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 		{
 			// See if the player render events are working.
 			setPerspective(Perspective.THIRD_PERSON_BACK);
-			takeScreenshot("in_game_overworld_third_person");
+			takeScreenshot("in_game_overworld_third_person", Duration.ZERO);
 			setPerspective(Perspective.FIRST_PERSON);
 		}
 
 		{
 			openInventory();
-			takeScreenshot("in_game_inventory");
+			takeScreenshot("in_game_inventory", Duration.ZERO);
 			closeScreen();
 		}
 
 		{
 			openGameMenu();
-			takeScreenshot("game_menu");
+			takeScreenshot("game_menu", Duration.ZERO);
 			clickScreenButton("menu.returnToMenu");
 			waitForScreen(TitleScreen.class);
 		}
@@ -145,18 +145,18 @@ public class FabricApiAutoTestClient implements ClientModInitializer {
 			server.runCommand("gamemode creative " + profile.getName());
 
 			waitForWorldTicks(20);
-			takeScreenshot("server_in_game");
+			takeScreenshot("server_in_game", Duration.ZERO);
 
 			{ // Test that we can enter and exit configuration
 				server.runCommand("debugconfig config " + profile.getName());
 				waitForScreen(ReconfiguringScreen.class);
-				takeScreenshot("server_config");
+				takeScreenshot("server_config", Duration.ZERO);
 				server.runCommand("debugconfig unconfig " + profile.getId());
 				waitForWorldTicks(1);
 			}
 
 			openGameMenu();
-			takeScreenshot("server_game_menu");
+			takeScreenshot("server_game_menu", Duration.ZERO);
 			clickScreenButton("menu.disconnect");
 
 			waitForScreen(MultiplayerScreen.class);
