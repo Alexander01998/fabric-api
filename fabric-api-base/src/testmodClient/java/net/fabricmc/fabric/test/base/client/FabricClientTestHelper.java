@@ -82,7 +82,7 @@ public final class FabricClientTestHelper {
 	}
 
 	public static void takeScreenshot(String name) {
-		takeScreenshot(name, Duration.ofSeconds(1));
+		takeScreenshot(name, Duration.ofMillis(50));
 	}
 
 	public static void takeScreenshot(String name, Duration delay) {
